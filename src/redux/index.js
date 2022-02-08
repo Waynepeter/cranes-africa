@@ -1,0 +1,52 @@
+
+import store from './store';
+import {
+  fetchResources, fetchResource, resourcePermissionAlloc, resourcePermissionDeAlloc, fetchModule,
+  fetchPermissions, fetchPermission, createPermissions, updatePermission, deletePermissions, updateModule,
+  fetchRoles, fetchRole, createRoles, updateRole, rolePermissionAlloc, rolePermissionDeAlloc, deleteRoles,
+  fetchUsers, fetchMyProfile, fetchOtherProfile, createUsers, loginUser, fetchModules, deleteModules,
+  fetchNode, fetchNetwork, fetchStats, updateLogins, updateProfile, deleteUser, uploadFile, createModule,
+  createCatalogue, updateCatalogue, deleteCatalogues, fetchCatalogue, fetchCatalogues, 
+  createDistribution, updateDistribution, deleteDistributions, fetchDistribution, fetchDistributions, 
+  createSalemode, updateSalemode, deleteSalemodes, fetchSalemode, fetchSalemodes, 
+  createProductcat, updateProductcat, deleteProductcats, fetchProductcat, fetchProductcats, 
+  createProductsubcat, updateProductsubcat, deleteProductsubcats, fetchProductsubcat, fetchProductsubcats, 
+  createProductgroup, updateProductgroup, deleteProductgroups, fetchProductgroup, fetchProductgroups, 
+  createProduct, updateProduct, deleteProducts, fetchProduct, fetchProducts,
+  fetchSubscriptions, fetchSubscription, deleteSubscriptions,
+  createFAQ, updateFAQ, deleteFAQs, fetchFAQ, fetchFAQs,
+  createFAQCat, updateFAQCat, deleteFAQCats, fetchFAQCat, fetchFAQCats,
+  createDesignation, updateDesignation, deleteDesignations, fetchDesignation, fetchDesignations, enrollStaff,
+  createValue, updateValue, deleteValues, fetchValue, fetchValues, createTestimonial, 
+  updateTestimonial, deleteTestimonials, fetchTestimonial, fetchTestimonials, createPartner, 
+  updatePartner, deletePartners, fetchPartner, fetchPartners,
+  createProject, updateProject, deleteProjects, fetchProject, fetchProjects, 
+  createFunfact, updateFunfact, deleteFunfacts, fetchFunfact, fetchFunfacts,
+  createService, updateService, deleteServices, fetchService, fetchServices
+} from './actions';
+
+export {
+  store,
+  fetchResources, fetchResource, resourcePermissionAlloc, resourcePermissionDeAlloc, fetchModule,
+  fetchPermissions, fetchPermission, createPermissions, updatePermission, deletePermissions, updateModule,
+  fetchRoles, fetchRole, createRoles, updateRole, rolePermissionAlloc, rolePermissionDeAlloc, deleteRoles,
+  fetchUsers, fetchMyProfile, fetchOtherProfile, createUsers, loginUser, fetchModules, deleteModules,
+  fetchNode, fetchNetwork, fetchStats, updateLogins, updateProfile, deleteUser, uploadFile, createModule,
+  createCatalogue, updateCatalogue, deleteCatalogues, fetchCatalogue, fetchCatalogues, 
+  createDistribution, updateDistribution, deleteDistributions, fetchDistribution, fetchDistributions, 
+  createSalemode, updateSalemode, deleteSalemodes, fetchSalemode, fetchSalemodes, 
+  createProductcat, updateProductcat, deleteProductcats, fetchProductcat, fetchProductcats, 
+  createProductsubcat, updateProductsubcat, deleteProductsubcats, fetchProductsubcat, fetchProductsubcats, 
+  createProductgroup, updateProductgroup, deleteProductgroups, fetchProductgroup, fetchProductgroups, 
+  createProduct, updateProduct, deleteProducts, fetchProduct, fetchProducts,
+  fetchSubscriptions, fetchSubscription, deleteSubscriptions,
+  createFAQ, updateFAQ, deleteFAQs, fetchFAQ, fetchFAQs,
+  createFAQCat, updateFAQCat, deleteFAQCats, fetchFAQCat, fetchFAQCats,
+  createDesignation, updateDesignation, deleteDesignations, fetchDesignation, fetchDesignations, enrollStaff,
+  createValue, updateValue, deleteValues, fetchValue, fetchValues, createTestimonial, 
+  updateTestimonial, deleteTestimonials, fetchTestimonial, fetchTestimonials, createPartner, 
+  updatePartner, deletePartners, fetchPartner, fetchPartners,
+  createProject, updateProject, deleteProjects, fetchProject, fetchProjects, 
+  createFunfact, updateFunfact, deleteFunfacts, fetchFunfact, fetchFunfacts,
+  createService, updateService, deleteServices, fetchService, fetchServices
+}

@@ -1,0 +1,58 @@
+/* Margins */
+.mb-5 {
+  margin-bottom: 5px;
+}
+.mb-10 {
+  margin-bottom: 10px;
+}
+.mb-20 {
+  margin-bottom: 20px;
+}
+.mb-30 {
+  margin-bottom: 30px;
+}
+
+.mr-5 {
+  margin-right: 5px;
+}
+/* Loding Spinners */
+.spinner-10 {
+  width: 10px;
+  height: 10px;
+}
+.spinner-20 {
+  width: 20px;
+  height: 20px;
+}
+.spinner-30 {
+  width: 30px;
+  height: 30px;
+}
+.spinner-40 {
+  width: 40px;
+  height: 40px;
+}
+.spinner-50 {
+  width: 50px;
+  height: 50px;
+}
+.spinner-60 {
+  width: 60px;
+  height: 60px;
+}
+.spinner-70 {
+  width: 70px;
+  height: 70px;
+}
+.spinner-80 {
+  width: 80px;
+  height: 80px;
+}
+.spinner-90 {
+  width: 90px;
+  height: 90px;
+}
+.spinner-100 {
+  width: 100px;
+  height: 100px;
+}

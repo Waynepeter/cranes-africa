@@ -1,0 +1,76 @@
+.mt-5 {
+  margin-top: 5px;
+}
+.mr-5 {
+  margin-left: 5px;
+}
+.ace-table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.ace-table td,
+.ace-table th {
+  border: 1px solid #ddd;
+  padding: 3px;
+}
+
+.ace-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.ace-table tr:hover {
+  background-color: #ddd;
+}
+
+.ace-table th {
+  padding-top: 4px;
+  padding-bottom: 5px;
+  text-align: center;
+  background-color: #e8e6e8;
+  color: #635b63;
+  text-transform: capitalize;
+}
+
+.entries {
+  margin: 2px 5px 2px 5px;
+}
+.entries-text {
+  margin: 0px 2px 0px 2px;
+  font-size: 15px;
+}
+.entries-select {
+  border-radius: 0%;
+  border: none;
+  font-size: 18px;
+}
+.table-search {
+  float: right;
+  margin-top: 2px;
+  margin-bottom: 8px;
+}
+.table-foot-right {
+  margin-top: 5px;
+}
+.pagination-ends {
+  font-size: 15px;
+}
+.text-divider {
+  border-left: 5px solid #04aa6d;
+  height: 100%;
+  margin: 0px 10px 0px 10px;
+}
+.paginationGuide {
+  font-size: 15px;
+}
+.searchPage {
+  margin-left: 5px;
+  width: 60px;
+  height: 20px;
+  margin-top: 8px;
+  /* border-top: none;
+  border-right: none;
+  border-radius: 0px;
+  border-left: 2px solid #cfcfcf; */
+}

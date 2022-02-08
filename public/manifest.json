@@ -1,0 +1,8 @@
+{
+  "short_name": "Short Name",
+  "name": "Application Full Name",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

@@ -1,0 +1,173 @@
+
+import { combineReducers } from 'redux';
+import {
+  resourceReducer, resourcesReducer, resourcePermissionAllocReducer, resourcePermissionDeAllocReducer
+} from './rdc-resource';
+import {
+  permissionsReducer, permissionReducer, permissionsCreateReducer, permissionUpdateReducer, 
+  permissionsDeleteReducer
+} from './rdc-permission';
+import {
+  rolesReducer, roleReducer, createRolesReducer, updateRoleReducer, rolePermissionAllocReducer,
+  rolePermissionDeAllocReducer, deleteRolesReducer
+} from './rdc-role';
+import {
+  usersReducer, myProfileReducer, otherProfileReducer, createUsersReducer, updateLoginsReducer, 
+  updateProfileReducer, loginReducer, deleteUserReducer, enrollStaffReducer
+} from './rdc-user';
+import { nodeReducer, networkReducer, statsReducer } from './rdc-dashboard';
+import { uploadFileReducer } from './rdc-file';
+import {
+  createModuleReducer, fetchModulesReducer, deleteModulesReducer, fetchModuleReducer, updateModuleReducer,
+  createDesignationReducer, updateDesignationReducer, deleteDesignationsReducer, fetchDesignationReducer, 
+  fetchDesignationsReducer, createValueReducer, updateValueReducer, deleteValuesReducer, fetchValueReducer, 
+  fetchValuesReducer, createTestimonialReducer, updateTestimonialReducer, deleteTestimonialsReducer, 
+  fetchTestimonialReducer, fetchTestimonialsReducer, createPartnerReducer, updatePartnerReducer, 
+  deletePartnersReducer, fetchPartnerReducer, fetchPartnersReducer,
+  createProjectReducer, updateProjectReducer, deleteProjectsReducer, fetchProjectReducer, fetchProjectsReducer, 
+  createFunfactReducer, updateFunfactReducer, deleteFunfactsReducer, fetchFunfactReducer, fetchFunfactsReducer
+} from './rdc-organization';
+import {
+  catalogueCreateReducer, catalogueUpdateReducer, cataloguesDeleteReducer, 
+  catalogueFetchReducer, cataloguesFetchReducer, distributionCreateReducer, 
+  distributionUpdateReducer, distributionsDeleteReducer, distributionFetchReducer, 
+  distributionsFetchReducer, salemodeCreateReducer, salemodeUpdateReducer, 
+  salemodesDeleteReducer, salemodeFetchReducer, salemodesFetchReducer, 
+  productcatCreateReducer, productcatUpdateReducer, productcatsDeleteReducer, 
+  productcatFetchReducer, productcatsFetchReducer, productsubcatCreateReducer, 
+  productsubcatUpdateReducer, productsubcatsDeleteReducer, productsubcatFetchReducer, 
+  productsubcatsFetchReducer, productgroupCreateReducer, productgroupUpdateReducer, 
+  productgroupsDeleteReducer, productgroupFetchReducer, productgroupsFetchReducer, 
+  productCreateReducer, productUpdateReducer, productsDeleteReducer, 
+  productFetchReducer, productsFetchReducer
+} from './rdc-products';
+import {
+  subscriptionsFetchReducer, subscriptionFetchReducer, subscriptionsDeleteReducer,
+  createFAQReducer, updateFAQReducer, deleteFAQsReducer, fetchFAQReducer, fetchFAQsReducer,
+  createFAQCatReducer, updateFAQCatReducer, deleteFAQCatsReducer, fetchFAQCatReducer, fetchFAQCatsReducer
+} from './rdc-media';
+import {
+  createServiceReducer, updateServiceReducer, deleteServicesReducer, fetchServiceReducer, fetchServicesReducer
+} from './rdc-service';
+
+const rootReducer = combineReducers({
+  resourcesData: resourcesReducer,
+  resourceData: resourceReducer,
+  resourcePermissionAllocData: resourcePermissionAllocReducer,
+  resourcePermissionDeAllocData: resourcePermissionDeAllocReducer,
+  permissionsData: permissionsReducer,
+  permissionData: permissionReducer,
+  createPermissionsData: permissionsCreateReducer,
+  updatePermissionData: permissionUpdateReducer,
+  deletePermissionsData: permissionsDeleteReducer,
+  rolesData: rolesReducer,
+  roleData: roleReducer,
+  createRolesData: createRolesReducer,
+  updateRoleData: updateRoleReducer,
+  deleteRolesData: deleteRolesReducer,
+  rolePermissionAllocData: rolePermissionAllocReducer,
+  rolePermissionDeAllocData: rolePermissionDeAllocReducer,
+  usersData: usersReducer,
+  otherProfileData: otherProfileReducer,
+  createUsersData: createUsersReducer,
+  myProfile: myProfileReducer,
+  updateLoginsData: updateLoginsReducer,
+  updateProfileData: updateProfileReducer,
+  deleteUserData: deleteUserReducer,
+  loginProfile: loginReducer,
+  nodeData: nodeReducer,
+  networkData: networkReducer,
+  statsData: statsReducer,
+  uploadFileData: uploadFileReducer,
+  createModuleData: createModuleReducer,
+  fetchModulesData: fetchModulesReducer,
+  deleteModulesData: deleteModulesReducer,
+  fetchModuleData: fetchModuleReducer,
+  updateModuleData: updateModuleReducer,
+  catalogueCreateData: catalogueCreateReducer,
+  catalogueUpdateData: catalogueUpdateReducer,
+  cataloguesDeleteData: cataloguesDeleteReducer,
+  catalogueFetchData: catalogueFetchReducer,
+  cataloguesFetchData: cataloguesFetchReducer,
+  distributionCreateData: distributionCreateReducer,
+  distributionUpdateData: distributionUpdateReducer,
+  distributionsDeleteData: distributionsDeleteReducer,
+  distributionFetchData: distributionFetchReducer,
+  distributionsFetchData: distributionsFetchReducer,
+  salemodeCreateData: salemodeCreateReducer,
+  salemodeUpdateData: salemodeUpdateReducer,
+  salemodesDeleteData: salemodesDeleteReducer,
+  salemodeFetchData: salemodeFetchReducer,
+  salemodesFetchData: salemodesFetchReducer,
+  productcatCreateData: productcatCreateReducer,
+  productcatUpdateData: productcatUpdateReducer,
+  productcatsDeleteData: productcatsDeleteReducer,
+  productcatFetchData: productcatFetchReducer,
+  productcatsFetchData: productcatsFetchReducer, 
+  productsubcatCreateData: productsubcatCreateReducer, 
+  productsubcatUpdateData: productsubcatUpdateReducer, 
+  productsubcatsDeleteData: productsubcatsDeleteReducer, 
+  productsubcatFetchData: productsubcatFetchReducer, 
+  productsubcatsFetchData: productsubcatsFetchReducer, 
+  productgroupCreateData: productgroupCreateReducer, 
+  productgroupUpdateData: productgroupUpdateReducer, 
+  productgroupsDeleteData: productgroupsDeleteReducer, 
+  productgroupFetchData: productgroupFetchReducer, 
+  productgroupsFetchData: productgroupsFetchReducer, 
+  productCreateData: productCreateReducer, 
+  productUpdateData: productUpdateReducer, 
+  productsDeleteData: productsDeleteReducer, 
+  productFetchData: productFetchReducer, 
+  productsFetchData: productsFetchReducer, 
+  fetchSubscriptionsData: subscriptionsFetchReducer,
+  fetchSubscriptionData: subscriptionFetchReducer,
+  deleteSubscriptionsData: subscriptionsDeleteReducer,
+  createFAQData: createFAQReducer,
+  updateFAQData: updateFAQReducer,
+  deleteFAQsData: deleteFAQsReducer,
+  fetchFAQData: fetchFAQReducer,
+  fetchFAQsData: fetchFAQsReducer,
+  createFAQCatData: createFAQCatReducer,
+  updateFAQCatData: updateFAQCatReducer,
+  deleteFAQCatsData: deleteFAQCatsReducer,
+  fetchFAQCatData: fetchFAQCatReducer,
+  fetchFAQCatsData: fetchFAQCatsReducer,
+  createDesignationData: createDesignationReducer,
+  updateDesignationData: updateDesignationReducer,
+  deleteDesignationsData: deleteDesignationsReducer,
+  fetchDesignationData: fetchDesignationReducer,
+  fetchDesignationsData: fetchDesignationsReducer,
+  enrollStaffData: enrollStaffReducer,
+  createValueData: createValueReducer,
+  updateValueData: updateValueReducer,
+  deleteValuesData: deleteValuesReducer,
+  fetchValueData: fetchValueReducer,
+  fetchValuesData: fetchValuesReducer,
+  createTestimonialData: createTestimonialReducer,
+  updateTestimonialData: updateTestimonialReducer,
+  deleteTestimonialsData: deleteTestimonialsReducer,
+  fetchTestimonialData: fetchTestimonialReducer,
+  fetchTestimonialsData: fetchTestimonialsReducer,
+  createPartnerData: createPartnerReducer,
+  updatePartnerData: updatePartnerReducer,
+  deletePartnersData: deletePartnersReducer,
+  fetchPartnerData: fetchPartnerReducer,
+  fetchPartnersData: fetchPartnersReducer,
+  createServiceData: createServiceReducer,
+  updateServiceData: updateServiceReducer,
+  deleteServicesData: deleteServicesReducer,
+  fetchServiceData: fetchServiceReducer,
+  fetchServicesData: fetchServicesReducer,
+  createProjectData: createProjectReducer,
+  updateProjectData: updateProjectReducer,
+  deleteProjectsData: deleteProjectsReducer,
+  fetchProjectData: fetchProjectReducer,
+  fetchProjectsData: fetchProjectsReducer,
+  createFunfactData: createFunfactReducer,
+  updateFunfactData: updateFunfactReducer,
+  deleteFunfactsData: deleteFunfactsReducer,
+  fetchFunfactData: fetchFunfactReducer,
+  fetchFunfactsData: fetchFunfactsReducer,
+});
+
+export default rootReducer;

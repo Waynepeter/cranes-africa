@@ -1,0 +1,323 @@
+
+import React, { useEffect, useMemo } from 'react';
+import { connect } from 'react-redux';
+import {
+  useTable, useSortBy, useFilters, useGlobalFilter, usePagination, useRowSelect,
+  useColumnOrder
+} from 'react-table';
+
+import ContentHeader from '../master/contentHeader';
+import { fetchResources } from '../../redux';
+import { resourceColumns, GlobalFilter, ColumnFilter, Checkbox } from '../tables';
+import '../tables/tables.css';
+
+function Resources({ fetchResources, resourcesData }) {
+
+  useEffect(() => {
+    fetchResources();
+  }, []);
+
+  const columns = useMemo(() => resourceColumns, []);
+  const data = useMemo(() => resourcesData.resources, []);
+  const defaultColumn = useMemo(() => {
+    return {
+      Filter: ColumnFilter
+    }
+  }, []);
+  const {
+    getTableProps, getTableBodyProps, headerGroups, footerGroups, prepareRow, 
+    allColumns, getToggleHideAllColumnsProps, // Column hiding.
+    //rows, // Activate for non-paginated tables & replace it with 'page' in JSX.
+    page, previousPage, nextPage, canNextPage, canPreviousPage, pageOptions, gotoPage, pageCount, 
+    setPageSize, // replace "rows" with "page" for paginated tables, in JSX too.
+    selectedFlatRows, // for row selection.
+    setGlobalFilter,
+    state: {
+      globalFilter, 
+      pageIndex, pageSize // for paginated tables.
+    },
+    setColumnOrder
+  } = useTable(
+    { columns, data, defaultColumn }, useFilters, useGlobalFilter, useSortBy, usePagination, 
+    useColumnOrder,
+    // for row selection >>>>>>>>>>>>>>>>>>>>>>>>>
+    useRowSelect,
+    (hooks) => {
+      hooks.visibleColumns.push((columns) => {
+        return [
+          {
+            id: 'selection',
+            Header: ({ getToggleAllRowsSelectedProps }) => (
+              <Checkbox {...getToggleAllRowsSelectedProps()} />
+            ),
+            Cell: ({ row }) => (
+              <Checkbox {...row.getToggleRowSelectedProps()} />
+            )
+          },
+          ...columns
+        ]
+      })
+    }
+  );
+
+  const changeOrder = () => {
+    // Change columns order as listed in the array.
+    setColumnOrder(['uuid', 'name', 'category', 'created_at', 'subCategory', 'updated_at']);
+  }
+
+  return (
+    <>
+      <ContentHeader headerData={
+        { title: "Resources", subTitle: "system", pageName: "Resources" }
+      }/>
+      <section className="content container-fluid">
+        <div className="box">
+          {/* <div className="box-header">
+            <h3 className="box-title">Resources</h3> NEWCOM598
+          </div> */}
+          <div className="box-body">
+            {
+              resourcesData.loading ? 
+                <>
+                  <img className="spinner-20" src="dist/img/spinner/spinner-2.gif" alt=""/> Loading resources
+                </>
+              : resourcesData.error ?
+                <pre>{JSON.stringify(resourcesData.error, null, 2)}</pre>
+              : resourcesData.resources ?
+                <>
+                  <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+                  <button onClick={changeOrder}>Change Cloumn Order</button>
+                  <div>
+                    <div><Checkbox {...getToggleHideAllColumnsProps()} /> Toggle All</div>
+                    { allColumns.map((column) => (
+                        <div key={column.id}>
+                          <label>
+                            <input type="checkbox" {...column.getToggleHiddenProps()} />
+                            {column.Header}
+                          </label>
+                        </div>
+                      ))
+                    }
+                  </div>
+
+                  <table {...getTableProps()}>
+                    <thead>
+                      { headerGroups.map(headerGroup => (
+                          <tr {...headerGroup.getHeaderGroupProps()}>
+                            { headerGroup.headers.map(column => (
+                                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                  <span>
+                                    {/* ▲ &#9650; and &#9660; or ▼ &#x25B2; and &#x25BC */}
+                                    {column.isSorted ? (column.isSortedDesc ? <i class="fa fa-chevron-down"></i> 
+                                                                            : <i class="fa fa-chevron-up"></i>) 
+                                                    : ''}
+                                  </span> 
+                                  {column.render('Header')}
+                                  <div>{column.canFilter ? column.render('Filter') : null}</div>
+                                </th>
+                              ))
+                            }
+                          </tr>
+                        ))
+                      }
+                    </thead>
+                    <tbody {...getTableBodyProps()}>
+                      { page.map(row => {
+                          prepareRow(row)
+                          return (
+                            <tr {...row.getRowProps()}>
+                              { row.cells.map(cell => {
+                                  return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                })
+                              }
+                            </tr>
+                          )
+                        })
+                      }
+                    </tbody>
+                    {/* <tfoot>
+                      { footerGroups.map(footerGroup => (
+                          <tr {...footerGroup.getFooterGroupProps()}>
+                            { footerGroup.headers.map(column => (
+                                <th {...column.getFooterProps()}>{column.render('Footer')}</th>
+                              ))
+                            }
+                          </tr>
+                        ))
+                      }
+                    </tfoot> */}
+                  </table>
+
+                  <span className="paginationGuide">Page <strong>{pageIndex + 1}</strong> of {pageOptions.length} </span>
+                  <span> | Go To Page 
+                    <input
+                      className="searchPage"
+                      type='number'
+                      defaultValue={pageIndex + 1}
+                      onChange={e => {
+                        const pageNumber = e.target.value ? Number(e.target.value) -1 : 0;
+                        gotoPage(pageNumber);
+                      }}
+                    />
+                  </span>
+                  <div className="btn-group pull-right">
+                    <select className="pull-left" value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
+                      {
+                        [5, 10, 25, 50, 100].map(pageSize => (
+                          <option key={pageSize} value={pageSize}>Show {pageSize}</option>
+                        ))
+                      }
+                    </select>
+                    <button type="button" class="btn btn-default" onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+                      <i class="fa fa-angle-double-left"></i>
+                    </button>
+                    <button type="button" class="btn btn-default" onClick={() => previousPage()} disabled={!canPreviousPage}>
+                      <i class="fa fa-chevron-left"></i> Prev
+                    </button>
+                    <button type="button" class="btn btn-default" onClick={() => nextPage()} disabled={!canNextPage}>
+                      <i class="fa fa-chevron-right"></i> Next
+                    </button>
+                    <button type="button" class="btn btn-default" onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+                      <i class="fa fa-angle-double-right"></i>
+                    </button>
+                  </div>
+                  
+                  {/* <pre>
+                    <code>
+                      { 
+                        // Instead of printing you can pass the data to an API endpoint for processing.
+                        JSON.stringify({ selectedFlatRows: selectedFlatRows.map((row) => row.original) }, null, 2 )
+                      }
+                    </code>
+                  </pre> */}
+                </>
+              : 
+                <h3 className="text-danger">Something has gone wrong!</h3>
+            }
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+const mapStateToProps = state => {
+  return {
+    resourcesData: state.resources
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchResources: () => dispatch(fetchResources())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Resources);
+
+/*
+{
+  resourcesData.loading ? 
+    <><img className="spinner-20" src="dist/img/spinner/spinner-2.gif" alt=""/> Loading resources</>
+  : resourcesData.error ?
+    <pre>{JSON.stringify(resourcesData.error, null, 2)}</pre>
+  : resourcesData.resources ?
+    <table id="example1" className="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>SN</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Sub-category</th>
+          <th>Created</th>
+          <th>Updated</th>
+        </tr>
+      </thead>
+      <tbody>
+      {
+        resourcesData && resourcesData.resources && resourcesData.resources.map(resource => 
+          <tr>
+            <td>{resource.name}</td>
+            <td>{resource.category}</td>
+            <td>{resource.subCategory}</td>
+            <td>{resource.created_at}</td>
+            <td>{resource.updated_at}</td>
+          </tr>
+        )
+      }
+      </tbody>
+      <tfoot>
+        <tr>
+          <th>SN</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Sub-category</th>
+          <th>Created</th>
+          <th>Updated</th>
+        </tr>
+      </tfoot>
+    </table>
+  : 
+    <h3 className="text-danger">Something has gone wrong!</h3>
+}
+*/
+
+
+import { format } from 'date-fns';
+
+const dateFormat = 'dd MMM yyyy hh:mm:ss'; // dd-MMM-yyyy hh:mm:ss.s
+
+export const resourceColumns = [
+  {
+    Header: "Sn",
+    accessor: "",
+    maxWidth: 50,
+    Cell: (row) => {
+      return <div>{Number(row.row.id) + 1}</div>;
+    },
+    disableSortBy: true,
+    disableFilters: true,
+  },
+  {
+    Header: 'name',
+    Footer: 'name',
+    accessor: 'name',
+    disableFilters: true
+  },
+  {
+    Header: 'category',
+    Footer: 'category',
+    accessor: 'category',
+    disableFilters: true
+  },
+  {
+    Header: 'sub category',
+    Footer: 'sub category',
+    accessor: 'subCategory',
+    disableFilters: true
+  },
+  {
+    Header: `Dates`,
+    Footer: `Dates`,
+    columns: [
+      {
+        Header: 'created at',
+        Footer: 'created at',
+        accessor: 'created_at',
+        Cell: ({ value }) => {
+          return format(new Date(value), dateFormat)
+        },
+        disableFilters: true
+      },
+      {
+        Header: 'updated at',
+        Footer: 'updated at',
+        accessor: 'updated_at',
+        Cell: ({ value }) => {
+          return format(new Date(value), dateFormat)
+        },
+        disableFilters: true
+      }
+    ]
+  }
+]
